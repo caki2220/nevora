@@ -65,13 +65,39 @@
         }
         .btn-buy:hover { transform: translateY(-3px); filter: brightness(1.1); box-shadow: 0 15px 35px var(--primary-glow); }
 
-        /* Specs Table Style */
         .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 30px; }
         .spec-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 15px; border-radius: 15px; }
         .spec-item label { display: block; font-size: 0.65rem; text-transform: uppercase; color: var(--text-dim); font-weight: 700; }
         .spec-item span { font-size: 0.95rem; font-weight: 700; color: #fff; }
 
-        /* Information Sections */
+        /* Nova Seção: Hardware Showcase */
+        .hardware-showcase { padding: 100px 0; border-top: 1px solid var(--border); }
+        .monitor-wrapper {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 40px;
+            padding: 60px; backdrop-filter: blur(10px);
+        }
+        .cpu-visual { position: relative; display: flex; justify-content: center; }
+        .cpu-visual img {
+            width: 100%; max-width: 380px; filter: drop-shadow(0 0 30px var(--primary-glow));
+            animation: float 6s ease-in-out infinite; z-index: 2;
+        }
+        .cpu-visual::after {
+            content: ''; position: absolute; width: 250px; height: 250px; 
+            background: var(--primary-glow); filter: blur(60px); border-radius: 50%; z-index: 1;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .tech-grid-internal { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .tech-box { background: rgba(255,255,255,0.03); padding: 20px; border-radius: 18px; border: 1px solid var(--border); }
+        .tech-box i { color: var(--primary); margin-bottom: 10px; font-size: 1.2rem; }
+        .tech-box h4 { font-size: 0.9rem; margin-bottom: 5px; }
+        .tech-box p { font-size: 0.75rem; color: var(--text-dim); line-height: 1.4; }
+
+        /* Features & FAQ */
         .features { padding: 100px 0; border-top: 1px solid var(--border); }
         .section-title { text-align: center; margin-bottom: 60px; }
         .section-title h2 { font-size: 2.5rem; font-weight: 800; }
@@ -94,8 +120,10 @@
         @media (max-width: 1024px) {
             .hero { grid-template-columns: 1fr; text-align: center; }
             .hero-text p { margin: 0 auto 40px; }
+            .monitor-wrapper { grid-template-columns: 1fr; padding: 30px; text-align: center; }
+            .cpu-visual img { max-width: 250px; }
+            .tech-grid-internal { grid-template-columns: 1fr; }
             .feature-grid { grid-template-columns: 1fr; }
-            .faq-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -127,11 +155,11 @@
                 <p>O hardware que o seu servidor FiveM merece. Processamento de alta densidade Haswell e rede otimizada para o menor ping do Brasil.</p>
                 
                 <div style="background: rgba(34, 147, 184, 0.05); padding: 25px; border-radius: 24px; border: 1px solid var(--border);">
-                    <h4 style="font-size: 0.9rem; margin-bottom: 15px; color: var(--primary);">DETALHES DA INFRAESTRUTURA</h4>
+                    <h4 style="font-size: 0.9rem; margin-bottom: 15px; color: var(--primary);">ESPECIFICAÇÕES DO NÓ</h4>
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-                        <div><strong style="display: block; font-size: 1.3rem;">30MB</strong><small style="color: var(--text-dim);">L3 Smart Cache</small></div>
-                        <div><strong style="display: block; font-size: 1.3rem;">9.6 GT/s</strong><small style="color: var(--text-dim);">Bus Speed QPI</small></div>
-                        <div><strong style="display: block; font-size: 1.3rem;">22 nm</strong><small style="color: var(--text-dim);">Litografia</small></div>
+                        <div><strong style="display: block; font-size: 1.3rem;">30MB</strong><small style="color: var(--text-dim);">Smart Cache</small></div>
+                        <div><strong style="display: block; font-size: 1.3rem;">9.6 GT/s</strong><small style="color: var(--text-dim);">Link Speed</small></div>
+                        <div><strong style="display: block; font-size: 1.3rem;">DDR4</strong><small style="color: var(--text-dim);">Bus 2133MHz</small></div>
                     </div>
                 </div>
             </div>
@@ -160,25 +188,61 @@
             </div>
         </section>
 
-        <section class="features" id="tecnologia">
+        <section class="hardware-showcase" id="tecnologia">
+            <div class="monitor-wrapper">
+                <div class="cpu-visual">
+                    <img src="cpu.png" alt="Intel Xeon Processador">
+                </div>
+                <div class="monitor-info">
+                    <span style="color: var(--primary); font-weight: 800; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;">Infraestrutura Industrial</span>
+                    <h2 style="font-size: 2.5rem; margin-top: 10px; line-height: 1.1;">O Coração da sua <span style="color: var(--primary);">Performance.</span></h2>
+                    <p style="color: var(--text-dim); margin-top: 20px;">Na Nevora, não usamos peças de computador doméstico. Utilizamos o <b>Intel® Xeon® E5-2670 v3</b>, um processador de classe mundial feito para suportar cargas de trabalho extremas 24/7.</p>
+                    
+                    <div class="tech-grid-internal">
+                        <div class="tech-box">
+                            <i class="fas fa-microchip"></i>
+                            <h4>12 Cores / 24 Threads</h4>
+                            <p>Capacidade massiva para rodar centenas de scripts simultâneos sem gargalo.</p>
+                        </div>
+                        <div class="tech-box">
+                            <i class="fas fa-bolt"></i>
+                            <h4>30MB Smart Cache</h4>
+                            <p>Otimiza a leitura da sua base de dados, garantindo carregamentos ultra-rápidos.</p>
+                        </div>
+                        <div class="tech-box">
+                            <i class="fas fa-memory"></i>
+                            <h4>Suporte ECC</h4>
+                            <p>Memória com correção de erros que evita que seu servidor caia por falhas de dados.</p>
+                        </div>
+                        <div class="tech-box">
+                            <i class="fas fa-server"></i>
+                            <h4>Virtualização VT-x</h4>
+                            <p>Isolamento total de recursos. O que você paga é o que você recebe.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
             <div class="section-title">
                 <h2>Tecnologia de Data Center</h2>
             </div>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <i class="fas fa-server"></i>
-                    <h3>Processamento Brutal</h3>
-                    <p>O Xeon 2670 v3 oferece 12 núcleos físicos e 24 threads por CPU, garantindo que o seu servidor lide com múltiplos scripts simultâneos sem perda de ticks.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-microchip"></i>
-                    <h3>Memória ECC Registrada</h3>
-                    <p>Diferente de memórias comuns, a DDR4 ECC detecta e corrige erros de dados automaticamente, evitando crashs inesperados do seu servidor.</p>
-                </div>
-                <div class="feature-card">
                     <i class="fas fa-shield-virus"></i>
-                    <h3>Anti-DDoS Especializado</h3>
-                    <p>Filtragem em camadas L3, L4 e L7 específica para tráfego UDP de jogos, protegendo seu IP de ataques volumétricos.</p>
+                    <h3>Anti-DDoS Game</h3>
+                    <p>Filtros específicos para tráfego UDP, protegendo sua cidade de ataques volumétricos e invasões.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h3>NVMe Gen4</h3>
+                    <p>Armazenamento até 10x mais rápido que SSDs comuns. Scripts e mapas carregam instantaneamente.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-network-wired"></i>
+                    <h3>Rede Otimizada</h3>
+                    <p>Conexão direta com os principais backbones do Brasil para garantir o menor ping possível.</p>
                 </div>
             </div>
         </section>
@@ -188,19 +252,19 @@
             <div class="faq-grid">
                 <div class="faq-item">
                     <h4>Como funciona o pagamento mensal?</h4>
-                    <p>O valor de R$ 47,90 é a mensalidade fixa do seu plano. Você paga por mês e pode cancelar ou fazer upgrade a qualquer momento no nosso portal.</p>
+                    <p>O valor é uma mensalidade fixa. Você renova a cada 30 dias para manter seu slot ativo.</p>
                 </div>
                 <div class="faq-item">
-                    <h4>Qual o prazo para as máquinas ficarem online?</h4>
-                    <p>Estamos em fase de pré-venda do novo cluster. A previsão de entrega e ativação é de 60 dias para quem garantir vaga agora.</p>
+                    <h4>Qual o prazo para entrega?</h4>
+                    <p>Estamos em pré-venda do novo cluster. A ativação ocorre em até 60 dias para quem garantir vaga agora.</p>
                 </div>
                 <div class="faq-item">
-                    <h4>Posso aumentar a RAM depois?</h4>
-                    <p>Com certeza. Oferecemos upgrades modulares. Se o seu projeto crescer, você aumenta os recursos sem precisar formatar seu servidor.</p>
+                    <h4>Posso fazer upgrade depois?</h4>
+                    <p>Sim! Você pode aumentar sua memória RAM ou armazenamento sem precisar formatar seu servidor.</p>
                 </div>
                 <div class="faq-item">
-                    <h4>Onde o servidor está localizado?</h4>
-                    <p>Hospedagem em São Paulo (Brasil). Latência mínima para jogadores de todo o território nacional.</p>
+                    <h4>Tem suporte para FiveM?</h4>
+                    <p>Nosso suporte auxilia em questões de conexão e infraestrutura da host para garantir que seu IP esteja sempre online.</p>
                 </div>
             </div>
         </section>
